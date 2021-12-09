@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose') 
+const Restaurant = require('./models/restaurant')
 mongoose.connect('mongodb://localhost/restaurant-list') 
 
 const app = express()
@@ -23,7 +24,11 @@ app.set('view engine','handlebars')
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
-    res.render('index',{restaurants: restaurantList.results})
+    Restaurant.find({}) 
+    .lean() 
+    .then(restaurants => res.render('index',{restaurants: restaurantList.results})) 
+    .catch(error => console.error(error)) 
+   
 })
 
 app.get('/restaurants/:restaurant_id',(req,res)=>{
