@@ -1,0 +1,10 @@
+<form action="/restaurants/{{ restaurants._id }}/edit" method="POST">
+  <input type="text" placeholder="name" name="name" value="{{ restaurants.name }}">
+  <input type="text" placeholder="category" name="category" value="{{ restaurants.category }}">
+  <input type="text" placeholder="phone" name="phone" value="{{ restaurants.phone }}">
+  <input type="text" placeholder="location" name="location" value="{{ restaurants.location }}">
+  <button type="submit">Save</button>
+  <a href="/">back</a>
+</form>
+
+
