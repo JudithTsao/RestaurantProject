@@ -13,6 +13,11 @@
           </div>
         </div>
       </form>
+      <div class="text-right">
+        <a href="/restaurants/new">
+          <button class="btn btn-secondary">新增餐廳</button>
+        </a>
+      </div>
     </div>
   </div>
 </div>
@@ -39,7 +44,6 @@
                 {{ this.rating }}
                 <i class="fas fa-star fa-xs"></i>
               </span>
-              <a href="/restaurants/new">create</a>
               <a href="./restaurants/{{ this._id }}">detail</a>
               <a href="./restaurants/{{ this._id }}/edit">edit</a>
               <form action="./restaurants/{{ this._id }}/delete" method="POST" style="display: inline;">

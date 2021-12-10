@@ -33,20 +33,18 @@ app.get('/', (req, res) => {
 
 })
 
-//app.get('/restaurants/:restaurant_id',(req,res)=>{
-//    const restaurantPicked = restaurantList.results.find(restaurant => 
-//    restaurant.id.toString() === req.params.restaurant_id)
-//    res.render('show', {restaurant: restaurantPicked })
-    
-//})
-
+//搜尋餐廳
 app.get('/search',(req,res)=>{
-    const keyword = req.query.keyword.toLowerCase()
-    const restaurants = restaurantList.results.filter(restaurant =>
-    restaurant.name.toLowerCase().includes(keyword) || restaurant.category.toLowerCase().includes(keyword)
-    )
-    res.render('index',{restaurants,keyword})
-   
+  const keyword = req.query.keyword.toLowerCase().trim()
+  Restaurant.find()
+  .lean()
+  .then(restaurants => {
+    const filteredRestaurants = restaurants.filter
+      (item => item.name.toLowerCase().includes(keyword) || item.category.includes(keyword))
+    res.render('index', {restaurants: filteredRestaurants, keyword}) 
+  })
+  .catch(error => console.log(error))
+  
 })
 
 // 新增餐廳
