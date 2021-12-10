@@ -55,6 +55,11 @@ app.get('/restaurants/new',(req,res) => {
 
 })
 
+app.post("/restaurants", (req, res) => {
+  Restaurant.create(req.body)
+    .then(() => res.redirect("/"))
+    .catch(err => console.log(err))
+})
 
 
 // 瀏覽特定頁面
@@ -93,6 +98,16 @@ app.post('/restaurants/:id/edit', (req, res) => {
     .then(()=> res.redirect(`/restaurants/${id}`))
     .catch(error => console.log(error))
 })
+
+//刪除特定餐廳
+app.post('/restaurants/:id/delete', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .then(restaurant => restaurant.remove())
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
 
 
 app.listen(port, () => {
